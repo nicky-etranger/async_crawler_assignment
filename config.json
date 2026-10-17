@@ -1,0 +1,16 @@
+{
+  "start_urls": ["https://example.com"],
+  "sitemap_urls": [],
+  "max_pages": 10,
+  "max_depth": 2,
+  "max_concurrent": 5,
+  "per_domain": 2,
+  "respect_robots": true,
+  "requests_per_second": 2.0,
+  "min_delay": 0.5,
+  "user_agent": "MyBot/1.0",
+  "same_domain_only": true,
+  "include_patterns": [],
+  "exclude_patterns": [],
+  "storage": {"type": "jsonl", "filename": "results.jsonl"}
+}

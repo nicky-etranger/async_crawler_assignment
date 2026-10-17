@@ -2,6 +2,7 @@ import asyncio
 import logging
 from collections import Counter
 import time
+from datetime import datetime, timezone
 from urllib.parse import urlsplit
 
 import aiohttp
@@ -13,6 +14,7 @@ from src.rate_limiter import RateLimiter
 from src.robots import RobotsParser
 from src.errors import NetworkError, PermanentError, TransientError
 from src.retry import RetryStrategy
+from src.storage import DataStorage
 
 
 logger = logging.getLogger(__name__)
@@ -31,6 +33,7 @@ class AsyncCrawler:
         user_agent: str = "AsyncCrawler/1.0",
         max_retries: int = 3,
         backoff_factor: float = 2.0,
+        storage: DataStorage | None = None,
     ) -> None:
         if max_concurrent < 1:
             raise ValueError("max_concurrent must be positive")
@@ -59,6 +62,7 @@ class AsyncCrawler:
         self._responses = {}
         self._status_counts = Counter()
         self.retry_strategy = RetryStrategy(max_retries=max_retries, backoff_factor=backoff_factor)
+        self.storage = storage
         self._timeout = aiohttp.ClientTimeout(total=30, connect=10, sock_read=20)
         self._session: aiohttp.ClientSession | None = None
         self.parser = HTMLParser()
@@ -136,7 +140,21 @@ class AsyncCrawler:
         html = await self.fetch_url(url)
         if not html:
             return {"url": url, "error": self._errors.get(url, "fetch failed")}
-        return await self.parser.parse_html(html, url)
+        data = await self.parser.parse_html(html, url)
+        data.update({
+            "crawled_at": datetime.now(timezone.utc).isoformat(),
+            **self._responses.get(url, {}),
+        })
+        if self.storage is not None:
+            for attempt in range(2):
+                try:
+                    await self.storage.save(data)
+                    break
+                except Exception as error:
+                    logger.error("Storage error for %s: %s", url, error)
+                    if attempt == 0:
+                        await asyncio.sleep(0.1)
+        return data
 
     async def crawl(
         self,
@@ -218,3 +236,5 @@ class AsyncCrawler:
     async def close(self) -> None:
         if self._session is not None and not self._session.closed:
             await self._session.close()
+        if self.storage is not None:
+            await self.storage.close()

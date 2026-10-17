@@ -1,0 +1,10 @@
+2026-10-17 21:57:32,017 INFO src.crawler Fetch started: https://example.com
+2026-10-17 21:57:32,438 INFO src.crawler Fetch attempt 1: https://example.com
+2026-10-17 21:57:32,621 INFO src.crawler Fetch completed: https://example.com
+2026-10-17 21:57:32,638 INFO src.crawler Processed=1 queued=0 failed=0 speed=1.61 pages/s
+2026-10-17 21:57:32,638 INFO src.advanced Progress: {'total_pages': 1, 'successful': 1, 'failed': 0, 'pages_per_second': 1.611, 'status_codes': {'200': 1}, 'top_domains': {'example.com': 1}, 'duration_seconds': 0.621, 'queued': 0, 'active_tasks': 0, 'progress_percent': 10.0, 'estimated_remaining_seconds': None, 'robots_blocked': 0, 'rate_limit': {'requests': 2, 'requests_per_second': 3.2206627000424115, 'average_delay': 0.5011201250017621}, 'retries': {'errors_by_type': {}, 'successful_retries': 0, 'average_retry_delay': 0.0}, 'permanent_errors': {}}
+2026-10-17 21:57:58,498 INFO src.crawler Fetch started: https://example.com
+2026-10-17 21:57:58,808 INFO src.crawler Fetch attempt 1: https://example.com
+2026-10-17 21:57:59,101 INFO src.crawler Fetch completed: https://example.com
+2026-10-17 21:57:59,114 INFO src.crawler Processed=1 queued=0 failed=0 speed=1.62 pages/s
+2026-10-17 21:57:59,114 INFO src.advanced Progress: {'total_pages': 1, 'successful': 1, 'failed': 0, 'pages_per_second': 1.622, 'status_codes': {'200': 1}, 'top_domains': {'example.com': 1}, 'duration_seconds': 0.616, 'queued': 0, 'active_tasks': 0, 'progress_percent': 10.0, 'estimated_remaining_seconds': None, 'robots_blocked': 0, 'rate_limit': {'requests': 2, 'requests_per_second': 3.243737476883669, 'average_delay': 0.5011967919999734}, 'retries': {'errors_by_type': {}, 'successful_retries': 0, 'average_retry_delay': 0.0}, 'permanent_errors': {}}

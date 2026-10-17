@@ -1,0 +1,29 @@
+{
+  "total_pages": 1,
+  "successful": 1,
+  "failed": 0,
+  "pages_per_second": 1.621,
+  "status_codes": {
+    "200": 1
+  },
+  "top_domains": {
+    "example.com": 1
+  },
+  "duration_seconds": 0.617,
+  "queued": 0,
+  "active_tasks": 0,
+  "progress_percent": 10.0,
+  "estimated_remaining_seconds": null,
+  "robots_blocked": 0,
+  "rate_limit": {
+    "requests": 2,
+    "requests_per_second": 3.241595941497016,
+    "average_delay": 0.5011967919999734
+  },
+  "retries": {
+    "errors_by_type": {},
+    "successful_retries": 0,
+    "average_retry_delay": 0.0
+  },
+  "permanent_errors": {}
+}
